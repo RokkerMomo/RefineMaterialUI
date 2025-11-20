@@ -33,6 +33,8 @@ import {
   CategoryShow,
 } from "./pages/categories";
 
+import { Dashboard } from "./pages/dashboard";
+
 function App() {
   return (
     <BrowserRouter>
@@ -48,6 +50,11 @@ function App() {
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerProvider}
                 resources={[
+                  {
+                    name:"dashboard",
+                    list: "/dashboard",
+
+                  },
                   {
                     name: "blog_posts",
                     list: "/blog-posts",
@@ -85,14 +92,20 @@ function App() {
                   >
                     <Route
                       index
-                      element={<NavigateToResource resource="blog_posts" />}
+                      element={<NavigateToResource resource="dashboard" />}
                     />
+
+                    <Route path="/dashboard">
+                      <Route index element={<Dashboard/>} />
+                    </Route>
+
                     <Route path="/blog-posts">
                       <Route index element={<BlogPostList />} />
                       <Route path="create" element={<BlogPostCreate />} />
                       <Route path="edit/:id" element={<BlogPostEdit />} />
                       <Route path="show/:id" element={<BlogPostShow />} />
                     </Route>
+
                     <Route path="/categories">
                       <Route index element={<CategoryList />} />
                       <Route path="create" element={<CategoryCreate />} />

@@ -10,7 +10,7 @@ import { useGetIdentity } from "@refinedev/core";
 import { HamburgerMenu, RefineThemedLayoutHeaderProps } from "@refinedev/mui";
 import React, { useContext } from "react";
 import { ColorModeContext } from "../../contexts/color-mode";
-
+import AccountMenu from "../avatar";
 type IUser = {
   id: number;
   name: string;
@@ -40,6 +40,7 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
             justifyContent="flex-end"
             alignItems="center"
           >
+            <AccountMenu />
             <IconButton
               color="inherit"
               onClick={() => {
