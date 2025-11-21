@@ -24,7 +24,7 @@ Instrucciones para instalar proyecto:
 
 Usuario1 : creed.bratton@dundermifflin.com usuario2 : michael.scott@dundermifflin.com
 
-password: demo demo
+password: demodemo
 
 `git clone https://github.com/RokkerMomo/RefineMaterialUI.git`
 
