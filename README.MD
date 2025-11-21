@@ -26,10 +26,10 @@ Usuario1 : creed.bratton@dundermifflin.com usuario2 : michael.scott@dundermiffli
 
 password: demo demo
 
-git clone https://github.com/RokkerMomo/RefineMaterialUI.git
+`git clone https://github.com/RokkerMomo/RefineMaterialUI.git
 
 cd .\RefineMaterialUI
 
 npm i
 
-npm run dev
+npm run dev`
