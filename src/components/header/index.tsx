@@ -15,6 +15,9 @@ type IUser = {
   id: number;
   name: string;
   avatar: string;
+  title: string;
+  phone: string;
+  email: string;
 };
 
 export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
@@ -57,20 +60,8 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
                 alignItems="center"
                 justifyContent="center"
               >
-                {user?.name && (
-                  <Typography
-                    sx={{
-                      display: {
-                        xs: "none",
-                        sm: "inline-block",
-                      },
-                    }}
-                    variant="subtitle2"
-                  >
-                    {user?.name}
-                  </Typography>
-                )}
-                <Avatar src={user?.avatar} alt={user?.name} />
+             
+                {/* <Avatar src={user?.avatar} alt={user?.name} /> */}
               </Stack>
             )}
           </Stack>
@@ -79,3 +70,4 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
     </AppBar>
   );
 };
+

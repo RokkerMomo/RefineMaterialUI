@@ -4,16 +4,25 @@ import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import TemporaryDrawer, { AccountSettingsDrawer } from '../drawer';
+import { useGetIdentity } from "@refinedev/core";
+
+type IUser = {
+  id: number;
+  name: string;
+  avatar: string;
+  title: string;
+  phone: string;
+  email: string;
+};
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const { data: user } = useGetIdentity<IUser>();
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -21,9 +30,13 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleOpenDrawer = () => {
+    setDrawerOpen(true);
+    handleClose();
+  };
 
-  const email = localStorage.getItem("email");
-  const firstLetter = email ? email.charAt(0).toUpperCase() : "";
+  // const email = localStorage.getItem("email");
+  const firstLetter = user?.name ? user?.name.charAt(0).toUpperCase() : "";
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -77,18 +90,7 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
+        <TemporaryDrawer onMenuClose={handleOpenDrawer}></TemporaryDrawer>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Logout fontSize="small" />
@@ -96,6 +98,7 @@ export default function AccountMenu() {
           Logout
         </MenuItem>
       </Menu>
+      <AccountSettingsDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
     </React.Fragment>
   );
 }
