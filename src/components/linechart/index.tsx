@@ -57,6 +57,7 @@ export default function BasicLineChart() {
       ]}
       height={300}
       sx={{
+        width: '100%',
         [`& .${areaElementClasses.root}`]: { opacity: 0.3 },
       }}
     />

@@ -1,6 +1,5 @@
-import { Container, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
-import { Fragment } from 'react/jsx-runtime';
 
 const expected = 9023009.00;
 const Realized = 5329523.00;
@@ -15,7 +14,13 @@ const settings = {
 
 export default function ArcDesign() {
   return (
-    <Fragment>
+    <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 2,
+      width: "100%",
+    }}>
       <Gauge
         {...settings}
         cornerRadius="50%"
@@ -32,23 +37,27 @@ export default function ArcDesign() {
           },
         })}
       />
-      <Container sx={{
-        flex: 1,
+      <Box sx={{
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        width: "100%",
+        gap: 2,
       }}>
-        <Typography>
-          <Typography>Expected</Typography>
-          ${expected.toLocaleString()}
-        </Typography>
-        <Typography>
-          <Typography>Realized</Typography>
-          ${Realized.toLocaleString()}
-        </Typography>
-      </Container>
-
-    </Fragment>
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <Typography variant="body2">Expected</Typography>
+          <Typography variant="body1" fontWeight={600}>
+            ${expected.toLocaleString()}
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <Typography variant="body2">Realized</Typography>
+          <Typography variant="body1" fontWeight={600}>
+            ${Realized.toLocaleString()}
+          </Typography>
+        </Box>
+      </Box>
+    </Box>
   );
 
 }
