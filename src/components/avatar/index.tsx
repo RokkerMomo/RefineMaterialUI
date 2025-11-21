@@ -21,6 +21,9 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const email = localStorage.getItem("email");
+  const firstLetter = email ? email.charAt(0).toUpperCase() : "";
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -33,7 +36,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }}>{firstLetter}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -74,13 +77,6 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
-        </MenuItem>
-        <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />

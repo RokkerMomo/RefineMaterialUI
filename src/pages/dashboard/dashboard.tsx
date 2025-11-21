@@ -2,14 +2,19 @@ import { Box, Container, Typography, useTheme } from "@mui/material";
 import ArcDesign from "../../components/gauge/index";
 import BasicSparkLine from "../../components/sparkline/index";
 import Linechart from "../../components/linechart/index";
+import { Authenticated } from "@refinedev/core";
 
 
 export const Dashboard = () => {
   const theme = useTheme();
 
   return (
-
-    <Box sx={{
+<Authenticated
+      key="dashboard"
+      loading={<div>loading...</div>}
+      fallback={<div>You cannot access this section</div>}
+    >
+      <Box sx={{
       display: "flex",
       flexDirection: "column",
       gap: 5,
@@ -102,5 +107,7 @@ export const Dashboard = () => {
 
 
     </Box>
+    </Authenticated>
+    
   );
 }
