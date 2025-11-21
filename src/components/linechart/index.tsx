@@ -1,4 +1,4 @@
-import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart, areaElementClasses } from '@mui/x-charts/LineChart';
 
 export default function BasicLineChart() {
   // Realistic money data in thousands (e.g., 125 = $125,000)
@@ -32,15 +32,18 @@ export default function BasicLineChart() {
           label: "Money Won",
           data: moneyWon,
           color: 'rgb(137, 86, 255)',
-          area: false,
+          area: true,
           stack: 'total',
+          highlightScope:{
+            highlight:"item"
+          }
         },
         {
           id: 'lost',
           label: "Money Lost",
           data: moneyLost,
           color: 'rgb(255, 179, 0)',
-          area: false, // Line only, no area
+          area: true,
         },
         // {
         //   id: 'lost-above',
@@ -53,6 +56,9 @@ export default function BasicLineChart() {
         // }
       ]}
       height={300}
+      sx={{
+        [`& .${areaElementClasses.root}`]: { opacity: 0.3 },
+      }}
     />
   );
 }

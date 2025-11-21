@@ -46,7 +46,14 @@ function App() {
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <CssBaseline />
-          <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
+          <GlobalStyles 
+            styles={{ 
+              html: { 
+                WebkitFontSmoothing: "antialiased",
+                MozOsxFontSmoothing: "grayscale",
+              } 
+            }} 
+          />
           <RefineSnackbarProvider>
             <DevtoolsProvider>
               <Refine

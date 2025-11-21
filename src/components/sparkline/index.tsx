@@ -5,42 +5,58 @@ import { SparkLineChart, SparkLineChartProps } from '@mui/x-charts/SparkLineChar
 import { areaElementClasses, lineElementClasses } from '@mui/x-charts/LineChart';
 import { chartsAxisHighlightClasses } from '@mui/x-charts/ChartsAxisHighlight';
 import Box from '@mui/material/Box';
-import data from './weekly-downloads.json';
+import companiesData from './companies-data.json';
+import contactsData from './contacts-data.json';
+import dealsData from './deals-data.json';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import PeopleIcon from '@mui/icons-material/People';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
-const downloads = data.map((item) => item.downloads);
-const weeks = data.map((item) => `${item.start} to ${item.end}`);
-
-const settings: SparkLineChartProps = {
-  data: downloads,
-  baseline: 'min',
-  margin: { bottom: 0, top: 5, left: 4, right: 0 },
-  xAxis: { id: 'week-axis', data: weeks },
-  yAxis: {
-    domainLimit: (_, maxValue: number) => ({
-      min: -maxValue / 6, //  Hack to add 5px bellow 0 like npm.
-      max: maxValue,
-    }),
-  },
-  sx: {
-    [`& .${areaElementClasses.root}`]: { opacity: 0.2 },
-    [`& .${lineElementClasses.root}`]: { strokeWidth: 3 },
-    [`& .${chartsAxisHighlightClasses.root}`]: {
-      stroke: 'rgb(137, 86, 255)',
-      strokeDasharray: 'none',
-      strokeWidth: 2,
-    },
-  },
-  slotProps: {
-    lineHighlight: { r: 4 }, // Reduce the radius of the axis highlight.
-  },
-  clipAreaOffset: { top: 2, bottom: 2 },
-  axisHighlight: { x: 'line' },
-};
 
 export default function NpmSparkLine(props: any) {
   const [weekIndex, setWeekIndex] = React.useState<null | number>(null);
+
+  // Select data based on title
+  const getData = () => {
+    if (props.tittle === "Number of companies") {
+      return companiesData;
+    } else if (props.tittle === "Number of contacts") {
+      return contactsData;
+    } else if (props.tittle === "Total deals in pipeline") {
+      return dealsData;
+    }
+    return companiesData; // default fallback
+  };
+
+  const data = getData();
+  const downloads = data.map((item) => item.downloads);
+  const weeks = data.map((item) => `${item.start} to ${item.end}`);
+
+  const settings: SparkLineChartProps = {
+    data: downloads,
+    baseline: 'min',
+    margin: { bottom: 0, top: 5, left: 4, right: 0 },
+    xAxis: { id: 'week-axis', data: weeks },
+    yAxis: {
+      domainLimit: (_, maxValue: number) => ({
+        min: -maxValue / 6, //  Hack to add 5px bellow 0 like npm.
+        max: maxValue,
+      }),
+    },
+    sx: {
+      [`& .${areaElementClasses.root}`]: { opacity: 0.2 },
+      [`& .${lineElementClasses.root}`]: { strokeWidth: 3 },
+      [`& .${chartsAxisHighlightClasses.root}`]: {
+        stroke: 'rgb(137, 86, 255)',
+        strokeDasharray: 'none',
+        strokeWidth: 2,
+      },
+    },
+    slotProps: {
+      lineHighlight: { r: 4 }, // Reduce the radius of the axis highlight.
+    },
+    clipAreaOffset: { top: 2, bottom: 2 },
+    axisHighlight: { x: 'line' },
+  };
 
   return (
     <Box
