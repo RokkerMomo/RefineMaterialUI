@@ -62,10 +62,7 @@ function App() {
                 }}
               >
                 <Routes>
-                  <Route
-                    index
-                    element={<LoginPage />}
-                  />
+                  <Route path="/login" element={<LoginPage />} />
                   <Route
                     element={
                       <ThemedLayout Header={() => <Header sticky />}>
@@ -73,12 +70,13 @@ function App() {
                       </ThemedLayout>
                     }
                   >
-                    <Route path="/dashboard">
-                      <Route index element={<Dashboard />} />
-                    </Route>
+                    <Route
+                      index
+                      element={<NavigateToResource resource="dashboard" />}
+                    />
 
-                    <Route path="/login">
-                      <Route index element={<LoginPage />} />
+                    <Route path="/dashboard">
+                      <Route index element={<Dashboard/>} />
                     </Route>
 
                     <Route path="/blog-posts">
@@ -87,7 +85,6 @@ function App() {
                       <Route path="edit/:id" element={<BlogPostEdit />} />
                       <Route path="show/:id" element={<BlogPostShow />} />
                     </Route>
-
                     <Route path="/categories">
                       <Route index element={<CategoryList />} />
                       <Route path="create" element={<CategoryCreate />} />

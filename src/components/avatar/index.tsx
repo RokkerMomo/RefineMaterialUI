@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import TemporaryDrawer, { AccountSettingsDrawer } from '../drawer';
-import { useGetIdentity } from "@refinedev/core";
+import { useGetIdentity, useLogout } from "@refinedev/core";
 
 type IUser = {
   id: number;
@@ -23,6 +23,7 @@ export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const { data: user } = useGetIdentity<IUser>();
+  const { mutate: logout } = useLogout();
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -91,7 +92,15 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <TemporaryDrawer onMenuClose={handleOpenDrawer}></TemporaryDrawer>
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            logout(undefined, {
+              onSuccess: () => {
+                handleClose();
+              },
+            });
+          }}
+        >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

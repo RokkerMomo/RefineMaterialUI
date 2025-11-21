@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
-import { useMany } from "@refinedev/core";
+import { Authenticated, useMany } from "@refinedev/core";
 import {
   DateField,
   DeleteButton,
@@ -119,8 +119,12 @@ export const BlogPostList = () => {
   );
 
   return (
+    <Authenticated 
+    key="blog-post-list"
+    redirectOnFail="/">
     <List>
       <DataGrid {...dataGridProps} columns={columns} />
     </List>
+    </Authenticated>
   );
 };

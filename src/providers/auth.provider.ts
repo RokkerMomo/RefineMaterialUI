@@ -56,7 +56,7 @@ export const authProvider: AuthProvider = {
 
     return {
       success: true,
-      redirectTo: "/login",
+      redirectTo: "/",
     };
   },
   onError: async (error) => {

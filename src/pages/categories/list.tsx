@@ -1,4 +1,5 @@
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
+import { Authenticated } from "@refinedev/core";
 import {
   DeleteButton,
   EditButton,
@@ -52,8 +53,12 @@ export const CategoryList = () => {
   );
 
   return (
+    <Authenticated 
+    key="category-list"
+    redirectOnFail="/">
     <List>
       <DataGrid {...dataGridProps} columns={columns} />
     </List>
+    </Authenticated>
   );
 };
